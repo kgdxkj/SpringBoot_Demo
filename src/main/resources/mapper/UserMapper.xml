@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wq.kgdxkj.dao.UserDao" >
+    <!-- 字段与实体的映射 -->
+    <resultMap id="BaseResultMap" type="cn.wq.kgdxkj.model.User">
+        <id column="userId" property="userid" jdbcType="INTEGER" />
+        <result column="userName" property="username" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+    </resultMap>
+    <!-- 根据条件查询，全部 -->
+    <select id="findAll" resultMap="BaseResultMap">
+        select * from t_user
+    </select>
+
+    <insert id="addUser" parameterType="cn.wq.kgdxkj.model.User" >
+        insert into t_user
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="userid != null" >
+                userId,
+            </if>
+            <if test="username != null" >
+                userName,
+            </if>
+            <if test="password != null" >
+                password,
+            </if>
+            <if test="phone != null" >
+                phone,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="userid != null" >
+                #{userid,jdbcType=INTEGER},
+            </if>
+            <if test="username != null" >
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null" >
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null" >
+                #{phone,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+
+</mapper>
