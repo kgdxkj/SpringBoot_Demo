@@ -1,7 +1,9 @@
 package cn.wq.kgdxkj.controller;
 
+import cn.wq.kgdxkj.base.Result;
 import cn.wq.kgdxkj.model.User;
 import cn.wq.kgdxkj.service.UserService;
+import cn.wq.kgdxkj.util.ResultTool;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,10 +25,10 @@ public class UserController {
 
     @GetMapping("/findAll")
     //http://localhost:8080/user/findAll
-    public String findAll() {
+    public Result findAll() {
         List<User> userList=userService.findAllUser();
         String usersJson = JSON.toJSONString(userList);
-        return usersJson;
+        return ResultTool.genSuccessResult(userList);
     }
 
     @ResponseBody

@@ -30,14 +30,18 @@ public class UserServiceImpl implements UserService{
     //@Transactional   //事务
     public int addUser(User user) {
 
-        userDao.addUser(user);
+        try{
+            userDao.addUser(user);
+            int a = 1/0;
+            user.setUserid(999);
+            user.setUsername("中国");
+            user.setPassword("4444444");
+            user.setPhone("110");
+            userDao.addUser(user);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
-        int a = 1/0;
-        user.setUserid(999);
-        user.setUsername("中国");
-        user.setPassword("4444444");
-        user.setPhone("110");
-        userDao.addUser(user);
 
         return 1;
     }
